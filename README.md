@@ -42,7 +42,7 @@ Prefer the most precise error: ``EmptyListError`` rather than a ``BadIndexError`
 Writing good test code is likely to be redundant. This is OK, as it is a stylistic (opinion) choice.
 I have provided good test cases for most of FixedSizeList. In Lab, we will focus on getting the code-coverage of FixedSizeList to 100%.
 
-## Rubric (115)
+## Rubric (120)
 
 Note that the maximum here is lower than usual. This assignment has many sections where you are implementing what was discussed in class, and therefore has far less room for interpretation and extra-credit work.
 
@@ -68,5 +68,8 @@ Getting this right can be very tricky, even with tests. You may refer to [algori
 ### (Max: 25) Efficiency Annotations.
 Comment the methods in ``FixedSizeList``, ``GrowableList``, ``SinglyLinkedList``, ``DoublyLinkedList`` and ``ChunkyLinkedList`` with their big-O efficiency, where O(n) is the size of the list.
 
-### (20) ChunkyLinkedList
+### (15) ChunkyLinkedList
 This is a data structure described in the comments and in the partial code given. Work on this after you have implemented ``SinglyLinkedList`` for reasons that will become obvious.
+
+### (10) ``Iterable<T>`` and ``public Iterator<T> iterator()``
+I have made ``SinglyLinkedList<T>`` an associated class ``Iter<T>`` which knows how to loop over that list. ``SinglyLinkedList<T>`` implements (therefore is-a ``P6List<T>`` but also is-a ``Iterable<T>``) this means that in the provdied ``ChunkyLinkedList.size()``, I can use a for loop to iterate over the chunks in the list. The for loop works on anything that is-a ``Iterable<T>``. Read about Iterator and Iterable and understand my implementation. Doing this for ``DoublyLinkedList`` will be fewer points than doing it for ``FixedSizeList`` and ``GrowableList`` because the implementation will be very different for the array-based lists.
