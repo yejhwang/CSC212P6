@@ -54,9 +54,24 @@ public interface P6List<T> {
 	public void addBack(T item);
 
 	/**
-	 * Add an item before ``index`` in this list.
-	 * Therefore, {@code addIndex(item, 0)} is the same as {@code addFront(item)}.
-	 * @param item the data to add to the list.
+	 * Get the first item in the list.
+	 * @return the item.
+	 * @throws EmptyListError
+	 */
+	public T getFront();
+
+	/**
+	 * Get the last item in the list.
+	 * @return the item.
+	 * @throws EmptyListError
+	 */
+	public T getBack();
+
+	/**
+	 * Add an item before ``index`` in this list. Therefore,
+	 * {@code addIndex(item, 0)} is the same as {@code addFront(item)}.
+	 * 
+	 * @param item  the data to add to the list.
 	 * @param index the index at which to add the item.
 	 */
 	public void addIndex(T item, int index);
@@ -72,13 +87,15 @@ public interface P6List<T> {
 
 	/**
 	 * Calculate the size of the list.
+	 * 
 	 * @return the length of the list, or zero if empty.
 	 */
 	public int size();
-	
+
 	/**
-	 * This is true if the list is empty.
-	 * This is usually implemented by looking at size() but that's a bad idea for linked lists.
+	 * This is true if the list is empty. This is usually implemented by looking at
+	 * size() but that's a bad idea for linked lists.
+	 * 
 	 * @return true if the list is empty.
 	 */
 	public boolean isEmpty();

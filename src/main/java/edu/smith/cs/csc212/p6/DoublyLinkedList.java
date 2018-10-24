@@ -52,6 +52,16 @@ public class DoublyLinkedList<T> implements P6List<T> {
 	}
 
 	@Override
+	public T getFront() {
+		throw new P6NotImplemented();
+	}
+
+	@Override
+	public T getBack() {
+		throw new P6NotImplemented();
+	}
+	
+	@Override
 	public T getIndex(int index) {
 		checkNotEmpty();
 		throw new P6NotImplemented();

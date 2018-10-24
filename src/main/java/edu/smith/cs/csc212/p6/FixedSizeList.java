@@ -93,4 +93,20 @@ public class FixedSizeList<T> implements P6List<T> {
 	public boolean isEmpty() {
 		return this.fill == 0;
 	}
+
+	@Override
+	public T getFront() {
+		if (this.isEmpty()) {
+			throw new EmptyListError();
+		}
+		return this.getIndex(0);
+	}
+
+	@Override
+	public T getBack() {
+		if (this.isEmpty()) {
+			throw new EmptyListError();
+		}
+		return this.getIndex(this.size()-1);
+	}
 }

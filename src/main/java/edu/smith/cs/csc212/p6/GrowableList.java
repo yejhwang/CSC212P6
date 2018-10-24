@@ -44,6 +44,16 @@ public class GrowableList<T> implements P6List<T> {
 	public void addIndex(T item, int index) {
 		throw new P6NotImplemented();
 	}
+	
+	@Override
+	public T getFront() {
+		return this.getIndex(0);
+	}
+
+	@Override
+	public T getBack() {
+		return this.getIndex(this.fill-1);
+	}
 
 	/**
 	 * Do not allow unchecked warnings in any other method.
@@ -65,5 +75,6 @@ public class GrowableList<T> implements P6List<T> {
 	public boolean isEmpty() {
 		return fill == 0;
 	}
+
 
 }

@@ -48,6 +48,17 @@ public class ChunkyLinkedList<T> implements P6List<T> {
 	public void addIndex(T item, int index) {
 		throw new P6NotImplemented();
 	}
+	
+	@Override
+	public T getFront() {
+		throw new P6NotImplemented();
+	}
+
+	@Override
+	public T getBack() {
+		throw new P6NotImplemented();
+	}
+
 
 	@Override
 	public T getIndex(int index) {

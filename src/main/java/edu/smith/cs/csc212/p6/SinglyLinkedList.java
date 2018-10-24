@@ -42,6 +42,16 @@ public class SinglyLinkedList<T> implements P6List<T> {
 	public void addIndex(T item, int index) {
 		throw new P6NotImplemented();
 	}
+	
+	@Override
+	public T getFront() {
+		return start.value;
+	}
+
+	@Override
+	public T getBack() {
+		throw new P6NotImplemented();
+	}
 
 	@Override
 	public T getIndex(int index) {
