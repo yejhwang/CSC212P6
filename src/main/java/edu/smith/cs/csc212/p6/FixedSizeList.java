@@ -1,5 +1,6 @@
 package edu.smith.cs.csc212.p6;
 
+import edu.smith.cs.csc212.p6.errors.BadIndexError;
 import edu.smith.cs.csc212.p6.errors.EmptyListError;
 import edu.smith.cs.csc212.p6.errors.RanOutOfSpaceError;
 
@@ -77,6 +78,9 @@ public class FixedSizeList<T> implements P6List<T> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public T getIndex(int index) {
+		if (index < 0 || index >= fill) {
+			throw new BadIndexError();
+		}
 		return (T) this.array[index];
 	}
 
@@ -85,4 +89,8 @@ public class FixedSizeList<T> implements P6List<T> {
 		return this.fill;
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return this.fill == 0;
+	}
 }

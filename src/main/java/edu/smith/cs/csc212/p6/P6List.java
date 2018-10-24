@@ -75,4 +75,11 @@ public interface P6List<T> {
 	 * @return the length of the list, or zero if empty.
 	 */
 	public int size();
+	
+	/**
+	 * This is true if the list is empty.
+	 * This is usually implemented by looking at size() but that's a bad idea for linked lists.
+	 * @return true if the list is empty.
+	 */
+	public boolean isEmpty();
 }
