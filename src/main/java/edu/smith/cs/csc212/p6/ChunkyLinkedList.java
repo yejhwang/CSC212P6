@@ -1,5 +1,7 @@
 package edu.smith.cs.csc212.p6;
 
+import edu.smith.cs.csc212.p6.errors.BadIndexError;
+import edu.smith.cs.csc212.p6.errors.EmptyListError;
 import edu.smith.cs.csc212.p6.errors.P6NotImplemented;
 
 /**
@@ -51,27 +53,47 @@ public class ChunkyLinkedList<T> implements P6List<T> {
 	
 	@Override
 	public T getFront() {
-		throw new P6NotImplemented();
+		return this.chunks.getFront().getFront();
 	}
 
 	@Override
 	public T getBack() {
-		throw new P6NotImplemented();
+		return this.chunks.getBack().getBack();
 	}
 
 
 	@Override
 	public T getIndex(int index) {
-		throw new P6NotImplemented();
+		if (this.isEmpty()) {
+			throw new EmptyListError();
+		}
+		int start = 0;
+		for (FixedSizeList<T> chunk : this.chunks) {
+			// calculate bounds of this chunk.
+			int end = start + chunk.size();
+			
+			// Check whether the index should be in this chunk:
+			if (start <= index && index < end) {
+				return chunk.getIndex(index - start);
+			}
+			
+			// update bounds of next chunk.
+			start = end;
+		}
+		throw new BadIndexError();
 	}
 
 	@Override
 	public int size() {
-		throw new P6NotImplemented();
+		int total = 0;
+		for (FixedSizeList<T> chunk : this.chunks) {
+			total += chunk.size();
+		}
+		return total;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		throw new P6NotImplemented();
+		return this.chunks.isEmpty();
 	}
 }

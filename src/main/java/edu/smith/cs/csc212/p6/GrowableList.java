@@ -3,11 +3,12 @@ package edu.smith.cs.csc212.p6;
 import edu.smith.cs.csc212.p6.errors.P6NotImplemented;
 
 public class GrowableList<T> implements P6List<T> {
+	public static final int START_SIZE = 32;
 	private Object[] array;
 	private int fill;
 	
 	public GrowableList() {
-		this.array = new Object[32];
+		this.array = new Object[START_SIZE];
 		this.fill = 0;
 	}
 
