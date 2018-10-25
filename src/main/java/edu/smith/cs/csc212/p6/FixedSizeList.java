@@ -23,9 +23,9 @@ public class FixedSizeList<T> implements P6List<T> {
 		if (this.size() == 0) {
 			throw new EmptyListError();
 		}
-		fill--;
-		T value = this.getIndex(fill);
-		this.array[fill] = null;
+		T value = this.getIndex(fill-1); //subtract 1 for size because used as index.
+		fill--;		
+		this.array[fill] = null; //don't have to subtract 1 here bc fill-- was implemented prior.
 		return value;
 	}
 
