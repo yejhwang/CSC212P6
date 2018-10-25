@@ -69,7 +69,7 @@ Getting this right can be very tricky, even with tests. You may refer to [algori
 Comment the methods in ``FixedSizeList``, ``GrowableList``, ``SinglyLinkedList``, ``DoublyLinkedList`` and ``ChunkyLinkedList`` with their big-O efficiency, where O(n) is the size of the list.
 
 ### (15) ChunkyLinkedList
-This is a data structure described in the comments and in the partial code given. Work on this after you have implemented ``SinglyLinkedList`` for reasons that will become obvious.
+This is a data structure described in the comments and in the partial code given. Work on this after you have implemented ``SinglyLinkedList`` for reasons that will become obvious if you open the code :) The closest reference I've found for this data structure online is the so-called [Unrolled Linked List](https://en.wikipedia.org/wiki/Unrolled_linked_list) on Wikipedia. We're not making our own "Node" class for ChunkyLinkedList, but it's roughly the same idea.
 
 ### (10) ``Iterable<T>`` and ``public Iterator<T> iterator()``
 I have made ``SinglyLinkedList<T>`` an associated class ``Iter<T>`` which knows how to loop over that list. ``SinglyLinkedList<T>`` implements (therefore is-a ``P6List<T>`` but also is-a ``Iterable<T>``) this means that in the provdied ``ChunkyLinkedList.size()``, I can use a for loop to iterate over the chunks in the list. The for loop works on anything that is-a ``Iterable<T>``. Read about Iterator and Iterable and understand my implementation. Doing this for ``DoublyLinkedList`` will be fewer points than doing it for ``FixedSizeList`` and ``GrowableList`` because the implementation will be very different for the array-based lists.
