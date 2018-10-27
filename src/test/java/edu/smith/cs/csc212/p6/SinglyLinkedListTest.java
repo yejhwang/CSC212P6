@@ -7,7 +7,7 @@ import edu.smith.cs.csc212.p6.errors.RanOutOfSpaceError;
 
 import org.junit.Assert;
 
-public class FixedSizeListTest {
+public class SinglyLinkedListTest {
 	@Test
 	public void testEmpty() {
 		P6List<String> data = new FixedSizeList<String>(0);
@@ -146,40 +146,4 @@ public class FixedSizeListTest {
 		Assert.assertEquals("a", data.removeIndex(0));
 		Assert.assertEquals(0, data.size());
 	}
-	
-	//Added Tests by Yej
-	@Test
-	public void testGetIndex() {
-		P6List<String> data = makeFullList();
-		Assert.assertEquals(4, data.size());
-		Assert.assertEquals("c", data.getIndex(2));
-	}
-	
-	@Test
-	public void testSize() {
-		P6List<String> data = makeFullList();
-		Assert.assertEquals(4, data.size());
-	}
-	
-	@Test
-	public void testIsEmpty() {
-		P6List<String> data = new FixedSizeList<String>(0);
-		Assert.assertEquals(true, data.isEmpty());
-
-		data = makeFullList();
-		Assert.assertEquals(false, data.isEmpty());
-	}
-	
-	@Test
-	public void testGetFront() {
-		P6List<String> data = makeFullList();
-		Assert.assertEquals("a", data.getFront());
-	}
-	
-	@Test
-	public void testGetBack() {
-		P6List<String> data = makeFullList();
-		Assert.assertEquals("d", data.getBack());
-	}
-	
 }
