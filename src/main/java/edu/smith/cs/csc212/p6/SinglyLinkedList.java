@@ -51,12 +51,23 @@ public class SinglyLinkedList<T> implements P6List<T>, Iterable<T> {
 
 	@Override
 	public T getBack() {
-		throw new P6NotImplemented();
+		checkNotEmpty();
+		Node<T> last = null;
+		for(Node<T> current = start; current != null; current = current.next) {
+			last = current;
+		}
+		return last.value;
 	}
 
 	@Override
 	public T getIndex(int index) {
-		throw new P6NotImplemented();
+		checkNotEmpty();
+		for(Node<T> current = start; current != null; current = current.next) {
+			if(current.) {
+				return current.value;
+			}
+		}
+		return BadIndexError();
 	}
 
 	@Override

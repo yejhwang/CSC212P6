@@ -1,6 +1,8 @@
 package edu.smith.cs.csc212.p6;
 
-import edu.smith.cs.csc212.p6.errors.P6NotImplemented;
+import java.util.Arrays;
+
+import edu.smith.cs.csc212.p6.errors.EmptyListError;
 
 public class GrowableList<T> implements P6List<T> {
 	public static final int START_SIZE = 32;
@@ -11,39 +13,80 @@ public class GrowableList<T> implements P6List<T> {
 		this.array = new Object[START_SIZE];
 		this.fill = 0;
 	}
-
+	
+	/**
+	 * Allows "sys.out.println" to print the array.
+	 * Used for debugging.
+	 */
+	public String toString(){
+        return Arrays.toString(this.array);
+   }
+	
 	@Override
 	public T removeFront() {
-		throw new P6NotImplemented();
+		this.reduceIfBig();
+		return removeIndex(0);
 	}
 
 	@Override
 	public T removeBack() {
-		throw new P6NotImplemented();
+		if (fill == 0) {
+			throw new EmptyListError();
+		}
+		this.reduceIfBig();
+		T value = this.getIndex(fill-1);
+		this.array[fill--] = null;
+		return value; 
 	}
 
 	@Override
 	public T removeIndex(int index) {
-		throw new P6NotImplemented();
+		if (fill == 0) {
+			throw new EmptyListError();
+		}
+		this.reduceIfBig();
+		T removed = this.getIndex(index);
+		for (int i=index; i<(fill-1); i++) {
+			this.array[i] = this.array[i+1];
+		}
+		this.array[fill--] = null;
+		return removed;
 	}
 
 	@Override
-	public void addFront(T item) {
-		throw new P6NotImplemented();
+	/**
+	 * O(n)
+	 */
+	public void addFront(T item) { 		
+		if (fill >= this.size()) { 
+			grow(); 
+		}
+		for (int i = fill-1; i>-1; i--) {
+			this.array[i+1] = this.array[i];
+		}
+		this.array[0] = item;
+		fill++;
+		
 	}
 
 	@Override
 	public void addBack(T item) {
-		// I've implemented part of this for you.
-		if (fill >= this.array.length) { 
-			throw new P6NotImplemented();
+		if (fill >= this.size()) { 
+			grow();
 		}
-		this.array[fill++] = item;
+		this.array[fill++] = item; //TODO: why not just fill since [] refers to indices?
 	}
 
 	@Override
-	public void addIndex(T item, int index) {
-		throw new P6NotImplemented();
+	public void addIndex(T item, int index) { 	
+		if (fill >= this.size()) { 
+			grow(); 
+		}
+		for(int i = fill; i>index; i--) {
+			this.array[i] = this.array[i-1];
+		}
+		this.array[index] = item;
+		fill++;
 	}
 	
 	@Override
@@ -68,7 +111,18 @@ public class GrowableList<T> implements P6List<T> {
 	}
 
 	@Override
+	/**
+	 * Distinguishing this.fill and this.size():
+	 * Size of the array is the length or maximum capacity,
+	 * and fill is how much of the array is filled.
+	 * NOTE: Different from other P6 Lists.
+	 * Note: separate getter method for fill created.
+	 */
 	public int size() {
+		return this.array.length;	
+	}
+	
+	public int getFill() {
 		return fill;
 	}
 
@@ -78,4 +132,29 @@ public class GrowableList<T> implements P6List<T> {
 	}
 
 
+	/**
+	 * O(n)
+	 */
+	public void grow() {		
+		//create array double the size of original.
+		 Object[] updArray = new Object[this.size()*2];		 
+		 //transfer data
+		 for(int i = 0; i<(fill-1); i++) {
+			 updArray[i] = this.getIndex(i);
+		 }
+		 this.array = updArray;
+	}
+	
+	public void reduceIfBig() {
+		// Create array half the size of original if too big.
+		// Minimum size is 32.
+		if(fill<(this.size()/2) && (this.size()>32)) {
+			 Object[] updArray = new Object[this.size()/2];		 
+			 //transfer data
+			 for(int i = 0; i<(fill-1); i++) {
+				 updArray[i] = this.getIndex(i);
+			 }
+			 this.array = updArray;
+		}
+	}
 }

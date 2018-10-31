@@ -10,7 +10,7 @@ import org.junit.Assert;
 public class SinglyLinkedListTest {
 	@Test
 	public void testEmpty() {
-		P6List<String> data = new FixedSizeList<String>(0);
+		P6List<String> data = new SinglyLinkedList<String>();
 		Assert.assertEquals(0, data.size());
 		data = new FixedSizeList<String>(32);
 		Assert.assertEquals(0, data.size());
@@ -18,25 +18,25 @@ public class SinglyLinkedListTest {
 	
 	@Test(expected=EmptyListError.class)
 	public void testRemoveFrontCrash() {
-		P6List<String> data = new FixedSizeList<String>(4);
+		P6List<String> data = new SinglyLinkedList<String>();
 		data.removeFront();
 	}
 	
 	@Test(expected=EmptyListError.class)
 	public void testRemoveBackCrash() {
-		P6List<String> data = new FixedSizeList<String>(4);
+		P6List<String> data = new SinglyLinkedList<String>();
 		data.removeBack();
 	}
 	
 	@Test(expected=EmptyListError.class)
 	public void testRemoveIndexCrash() {
-		P6List<String> data = new FixedSizeList<String>(4);
+		P6List<String> data = new SinglyLinkedList<String>();
 		data.removeIndex(3);
 	}
 
 	@Test
 	public void testAddToFront() {
-		P6List<String> data = new FixedSizeList<String>(4);
+		P6List<String> data = new SinglyLinkedList<String>();
 		data.addFront("1");
 		Assert.assertEquals(1, data.size());
 		Assert.assertEquals("1", data.getIndex(0));
@@ -58,7 +58,7 @@ public class SinglyLinkedListTest {
 	
 	@Test
 	public void testAddToBack() {
-		P6List<String> data = new FixedSizeList<String>(4);
+		P6List<String> data = new SinglyLinkedList<String>();
 		data.addBack("1");
 		Assert.assertEquals(1, data.size());
 		Assert.assertEquals("1", data.getIndex(0));
@@ -79,11 +79,11 @@ public class SinglyLinkedListTest {
 	}
 	
 	/**
-	 * Helper method to make a full list.
+	 * Helper method to make a pre-created list.
 	 * @return
 	 */
-	public P6List<String> makeFullList() {
-		P6List<String> data = new FixedSizeList<String>(4);
+	public P6List<String> makeAbcdFilledList() {
+		P6List<String> data = new SinglyLinkedList<String>();
 		data.addBack("a");
 		data.addBack("b");
 		data.addBack("c");
@@ -93,22 +93,22 @@ public class SinglyLinkedListTest {
 	
 	@Test(expected=RanOutOfSpaceError.class)
 	public void testAddBackFull() {
-		makeFullList().addBack("no space");
+		makeAbcdFilledList().addBack("no space");
 	}
 	
 	@Test(expected=RanOutOfSpaceError.class)
 	public void testAddFrontFull() {
-		makeFullList().addFront("no space");
+		makeAbcdFilledList().addFront("no space");
 	}
 	
 	@Test(expected=RanOutOfSpaceError.class)
 	public void testAddIndexFull() {
-		makeFullList().addIndex("no space", 2);
+		makeAbcdFilledList().addIndex("no space", 2);
 	}
 	
 	@Test
 	public void testRemoveFront() {
-		P6List<String> data = makeFullList();
+		P6List<String> data = makeAbcdFilledList();
 		Assert.assertEquals(4, data.size());
 		Assert.assertEquals("a", data.removeFront());
 		Assert.assertEquals(3, data.size());
@@ -121,7 +121,7 @@ public class SinglyLinkedListTest {
 	}
 	@Test
 	public void testRemoveBack() {
-		P6List<String> data = makeFullList();
+		P6List<String> data = makeAbcdFilledList();
 		Assert.assertEquals(4, data.size());
 		Assert.assertEquals("d", data.removeBack());
 		Assert.assertEquals(3, data.size());
@@ -135,7 +135,7 @@ public class SinglyLinkedListTest {
 	
 	@Test
 	public void testRemoveIndex() {
-		P6List<String> data = makeFullList();
+		P6List<String> data = makeAbcdFilledList();
 		Assert.assertEquals(4, data.size());
 		Assert.assertEquals("c", data.removeIndex(2));
 		Assert.assertEquals(3, data.size());
